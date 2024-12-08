@@ -1,0 +1,134 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/KalderWorld/kalder-backend
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: c785115df2e0fafb4d00df44fc8bc717ea5a5d50
+
+imagePullSecrets:
+  - name: docker-registry
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations:
+    eks.amazonaws.com/role-arn: 'arn:aws:iam::124355638749:role/kalder-backend-dev'
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: kalder-backend
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  className: nginx-external
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "400m"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location ~* "^/users/(.*)/avatar" {
+          deny all;
+          return 403;
+        }
+
+      location ~* "^/colorways/(.*)/frames" {
+          limit_except POST {
+            deny all;
+          }
+        }
+  hosts:
+    - host: api.dev.kalder.xyz
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+database:
+  host: db.dev.kalder.xyz
+  port: 5432
+
+redis:
+  host: redis.dev.kalder.xyz:6379
+
+asynqmon:
+  resources:
+    requests:
+      cpu: 300m
+      memory: 100Mi
+    limits:
+      cpu: 300m
+      memory: 1Gi
+  image:
+    repository: hibiken/asynqmon
+    tag: 0.7.1
+  ingress:
+    className: nginx-external
+    annotations:
+      nginx.ingress.kubernetes.io/auth-url: "https://oauth2proxy.dev.kalder.xyz/oauth2/auth"
+      nginx.ingress.kubernetes.io/auth-signin: "https://oauth2proxy.dev.kalder.xyz/oauth2/start?rd=$escaped_request_uri"
+    hosts:
+      - host: worker.dev.kalder.xyz
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+
+api:
+  resources:
+    requests:
+      cpu: 300m
+      memory: 100Mi
+    limits:
+      cpu: 300m
+      memory: 1Gi
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 75
+
+worker:
+  resources:
+    requests:
+      cpu: 300m
+      memory: 100Mi
+    limits:
+      cpu: 300m
+      memory: 1Gi
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 75
+
+cronJobs: {}
+
+externalSecrets:
+  db:
+    secretsManagerName: db
+
+env: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+environment: development
