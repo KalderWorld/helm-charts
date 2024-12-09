@@ -110,6 +110,7 @@ spec:
 
 ---
 
+{{- if .Values.asynqmon.serviceMonitor.enabled -}}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -130,3 +131,4 @@ spec:
     - path: /metrics
       port: http
       interval: 5s
+{{- end }}

@@ -66,6 +66,8 @@ redis:
   host: redis.dev.kalder.xyz:6379
 
 asynqmon:
+  serviceMonitor:
+    enabled: false
   resources:
     requests:
       cpu: 300m
