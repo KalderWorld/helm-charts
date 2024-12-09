@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/KalderWorld/kalder-backend
+  repository: ghcr.io/kalderworld/kalder-backend
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: c785115df2e0fafb4d00df44fc8bc717ea5a5d50
