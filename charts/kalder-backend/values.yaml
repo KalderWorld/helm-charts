@@ -40,17 +40,6 @@ ingress:
   className: nginx-external
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "400m"
-    nginx.ingress.kubernetes.io/server-snippet: |
-      location ~* "^/users/(.*)/avatar" {
-          deny all;
-          return 403;
-        }
-
-      location ~* "^/colorways/(.*)/frames" {
-          limit_except POST {
-            deny all;
-          }
-        }
   hosts:
     - host: api.dev.kalder.xyz
       paths:
