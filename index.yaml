@@ -3,7 +3,17 @@ entries:
   kalder-backend:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-12-08T17:26:52.702290595Z"
+    created: "2024-12-09T02:27:28.629499089Z"
+    description: A Helm chart for Kubernetes
+    digest: f391290bd27a2c362e9b367966981855de9c2f5ef3521ca12bd54a1f92208def
+    name: kalder-backend
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/KalderWorld/helm-charts/gh-pages/kalder-backend-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-12-09T02:27:28.628949125Z"
     description: A Helm chart for Kubernetes
     digest: 7fef8a1e7a6c5cb4448b3f0ea472d51454e1803383ee30d73ec0184494e2d784
     name: kalder-backend
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/KalderWorld/helm-charts/gh-pages/kalder-backend-0.0.1.tgz
     version: 0.0.1
-generated: "2024-12-08T17:26:52.70162716Z"
+generated: "2024-12-09T02:27:28.62830221Z"
