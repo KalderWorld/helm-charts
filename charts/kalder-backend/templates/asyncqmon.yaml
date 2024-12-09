@@ -78,6 +78,7 @@ spec:
 
 ---
 
+{{- if .Values.asynqmon.ingress.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -105,6 +106,7 @@ spec:
                   number: {{ $.Values.service.port }}
           {{- end }}
     {{- end }}
+{{- end }}
 
 ---
 

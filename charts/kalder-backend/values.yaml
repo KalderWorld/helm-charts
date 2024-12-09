@@ -77,6 +77,7 @@ asynqmon:
     repository: hibiken/asynqmon
     tag: 0.7.1
   ingress:
+    enabled: false
     className: nginx-external
     annotations:
       nginx.ingress.kubernetes.io/auth-url: "https://oauth2proxy.dev.kalder.xyz/oauth2/auth"
