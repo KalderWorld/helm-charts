@@ -64,8 +64,6 @@ Create the name of the service account to use
 {{- define "kalder-backend.envFrom" -}}
 - secretRef:
     name: {{ include "kalder-backend.fullname" . }}-db
-- secretRef:
-    name: {{ include "kalder-backend.fullname" . }}-twilio
 - configMapRef:
     name: {{ include "kalder-backend.fullname" . }}-configmap
 {{- end }}
