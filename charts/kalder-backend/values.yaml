@@ -41,18 +41,18 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "400m"
   hosts:
-    - host: api.dev.kalder.xyz
+    - host: dev-api.getkalder.com
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls: []
 
 database:
-  host: db.dev.kalder.xyz
+  host: db.dev-api.getkalder.com
   port: 5432
 
 redis:
-  host: redis.dev.kalder.xyz:6379
+  host: redis.dev-api.getkalder.com:6379
 
 asynqmon:
   serviceMonitor:
@@ -71,10 +71,10 @@ asynqmon:
     enabled: false
     className: nginx-external
     annotations:
-      nginx.ingress.kubernetes.io/auth-url: "https://oauth2proxy.dev.kalder.xyz/oauth2/auth"
-      nginx.ingress.kubernetes.io/auth-signin: "https://oauth2proxy.dev.kalder.xyz/oauth2/start?rd=$escaped_request_uri"
+      nginx.ingress.kubernetes.io/auth-url: "https://oauth2proxy.dev-api.getkalder.com/oauth2/auth"
+      nginx.ingress.kubernetes.io/auth-signin: "https://oauth2proxy.dev-api.getkalder.com/oauth2/start?rd=$escaped_request_uri"
     hosts:
-      - host: worker.dev.kalder.xyz
+      - host: worker.dev-api.getkalder.com
         paths:
           - path: /
             pathType: ImplementationSpecific
