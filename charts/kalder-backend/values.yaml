@@ -109,11 +109,27 @@ worker:
     targetCPUUtilizationPercentage: 80
     targetMemoryUtilizationPercentage: 75
 
-cronJobs: {}
+cronJobs:
+  fidel-offer-sync:
+    enabled: true
+    cron: "30 */6 * * *"   # at minute 30 every 6 hours
+    command: [ FidelOfferSync ]
+    concurrencyPolicy: Forbid
+    failedJobsHistoryLimit: 1
+    env: [ ]
+  check-refund-period:
+    enabled: true
+    cron: "0 */6 * * *"   # at minute 0 every 6 hours
+    command: [ CheckRefundPeriod ]
+    concurrencyPolicy: Forbid
+    failedJobsHistoryLimit: 1
+    env: [ ]
 
 externalSecrets:
   db:
     secretsManagerName: db
+  client:
+    secretsManagerName: kalder-backend-client
 
 env: {}
 
