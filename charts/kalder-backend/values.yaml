@@ -130,6 +130,8 @@ externalSecrets:
     secretsManagerName: db
   client:
     secretsManagerName: kalder-backend-client
+  fidel:
+    secretsManagerName: fidel
 
 env: {}
 
