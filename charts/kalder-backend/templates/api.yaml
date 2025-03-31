@@ -51,10 +51,6 @@ spec:
       serviceAccountName: {{ include "kalder-backend.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      volumes:
-        - name: firebase-volume
-          secret:
-            secretName: firebase-service-account
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -69,10 +65,6 @@ spec:
             - name: app
               containerPort: 8080
               protocol: TCP
-          volumeMounts:
-            - name: firebase-volume
-              mountPath: "/kalder-backend/firebase-service-account"
-              readOnly: true
           livenessProbe:
             initialDelaySeconds: 5
             periodSeconds: 15

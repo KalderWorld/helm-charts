@@ -32,10 +32,6 @@ spec:
       serviceAccountName: {{ include "kalder-backend.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      volumes:
-        - name: firebase-volume
-          secret:
-            secretName: firebase-service-account
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -46,10 +42,6 @@ spec:
           workingDir: /kalder-backend
           envFrom:
             {{- include "kalder-backend.envFrom" . | nindent 12 }}
-          volumeMounts:
-            - name: firebase-volume
-              mountPath: "/kalder-backend/firebase-service-account"
-              readOnly: true
           resources:
             {{- toYaml .Values.worker.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
