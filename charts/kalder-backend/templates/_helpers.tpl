@@ -68,6 +68,8 @@ Create the name of the service account to use
     name: {{ include "kalder-backend.fullname" . }}-client
 - secretRef:
     name: {{ include "kalder-backend.fullname" . }}-fidel
+- secretRef:
+    name: {{ include "kalder-backend.fullname" . }}-auth0-actions
 - configMapRef:
     name: {{ include "kalder-backend.fullname" . }}-configmap
 {{- end }}
