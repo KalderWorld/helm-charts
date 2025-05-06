@@ -132,6 +132,8 @@ externalSecrets:
     secretsManagerName: kalder-backend-client
   fidel:
     secretsManagerName: fidel
+  auth0-actions:
+    secretsManagerName: auth0-actions
 
 env: {}
 
