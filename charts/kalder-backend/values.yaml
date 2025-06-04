@@ -134,6 +134,8 @@ externalSecrets:
     secretsManagerName: fidel
   auth0-actions:
     secretsManagerName: auth0-actions
+  plaid:
+    secretsManagerName: plaid
 
 env: {}
 
